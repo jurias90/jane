@@ -59,7 +59,7 @@ const Products = () => {
           catagory={p.catagory}
           kind={p.kinnd}
           kind_subtype={p["kind_subtype"]}
-          img={p.img}
+          img={p.photos[0].urls.extraLarge}
         />
       ))}
     </Page>

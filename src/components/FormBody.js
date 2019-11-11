@@ -1,43 +1,51 @@
-import React, { useEffect} from "react";
-import { useSelector, connect } from "react-redux";
-import { updateUser } from "../redux/ducks/user";
-import { Link } from 'react-router-dom'
-import Input from "./Input";
-import styled from "@emotion/styled";
-import useForm from "../hooks/useForm";
-import Search from "./Search";
+import React, { useEffect } from 'react'
+import { useSelector, connect } from 'react-redux'
+import { updateUser } from '../redux/ducks/user'
+import { withRouter } from 'react-router-dom'
+import Input from './Input'
+import styled from '@emotion/styled'
+import useForm from '../hooks/useForm'
+import Search from './Search'
 
 const mapDispatchToProps = dispatch => ({
-  dispatchUpdateUser: payload => dispatch(updateUser(payload))
-});
+  dispatchUpdateUser: payload => dispatch(updateUser(payload)),
+})
 
 const Form = styled.div({
-  margin: "5% 10%",
-  borderColor: ' 1px solid grey'
-});
+  margin: '5% 10%',
+  borderColor: ' 1px solid grey',
+})
 
-const FormBody = ({ dispatchUpdateUser }) => {
-  const user = useSelector(state => state.user.user);
+const FormBody = ({ dispatchUpdateUser, history }) => {
+  const user = useSelector(state => state.user.user)
 
-  const form = useForm({ form: user });
+  const form = useForm({ form: user })
 
   const onChange = event => {
     const {
-      target: { name, value }
-    } = event;
+      target: { name, value },
+    } = event
     dispatchUpdateUser({
-      [name]: value
-    });
-  };
-
-  useEffect(()=> {
-  },[user])
-
-  const setValid = () =>{
-    dispatchUpdateUser({
-      ['isValid']: true
-    });
+      [name]: value,
+    })
   }
+
+  const handleOnClick = () => {
+    console.log('Form', form.isValid)
+    history.push('/search')
+  }
+
+  useEffect(() => {
+    if (form.isValid) {
+      dispatchUpdateUser({
+        ['isValid']: true,
+      })
+    } else {
+      dispatchUpdateUser({
+        ['isValid']: false,
+      })
+    }
+  }, [form.isValid])
 
   return (
     <Form>
@@ -78,10 +86,14 @@ const FormBody = ({ dispatchUpdateUser }) => {
         errors={form.errors}
       />
       <p>City</p>
-      <Input 
-      name="locality" 
-      value={user.locality} 
-      onChange={onChange} />
+      <Input
+        name="locality"
+        value={user.locality}
+        onChange={onChange}
+        form={user}
+        validations={form.validations}
+        errors={form.errors}
+      />
       <p>State</p>
       <Input
         name="administrative_area_level_1"
@@ -92,26 +104,21 @@ const FormBody = ({ dispatchUpdateUser }) => {
         errors={form.errors}
       />
       <p>Zipcode</p>
-      <Input 
-      name="postal_code" 
-      value={user.postal_code} 
-      onChange={onChange} 
-      form={user}
-      validations={form.validations}
-      errors={form.errors}/>
-
-     <Link 
-     to="/search">
-       <button 
-       name="submit" 
-       disabled={!form.isValid} 
-       onClick={setValid}>
+      <Input
+        name="postal_code"
+        value={user.postal_code}
+        onChange={onChange}
+        form={user}
+        validations={form.validations}
+        errors={form.errors}
+      />
+      <button name="submit" disabled={!form.isValid} onClick={handleOnClick}>
         Submit
-      </button></Link> 
+      </button>
     </Form>
-  );
-};
+  )
+}
 export default connect(
   undefined,
   mapDispatchToProps
-)(FormBody);
+)(withRouter(FormBody))

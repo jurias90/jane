@@ -9,13 +9,22 @@ const InputField = styled.input(({errors}) =>({
 
 const Input = ({ name, value, onChange, form, validations, errors }) => {
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState("")
+  const [isTouched, setIsTouched] = useState(false)
+  const [initialValue] = useState(value)
+
+  useEffect(()=>{
+
+    if(value !== initialValue){
+      setIsTouched(true)
+    }
+  },[value])
 
   useEffect(() => {
-    if (validations) {
+    if (validations && isTouched) {
     name in errors ? setError(errors[name]) : setError("");
     }
-  }, [value]);
+  }, [value,validations]);
 
   return (
     <div>
