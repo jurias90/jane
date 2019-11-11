@@ -1,39 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-const InputField = styled.input(({errors}) =>({
-    color: errors ? "red" : "black",
-    width: '50%'
+const InputField = styled.input(({ errors }) => ({
+  color: errors ? 'red' : 'black',
+  width: '50%',
 }))
 
-
 const Input = ({ name, value, onChange, form, validations, errors }) => {
-
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
   const [isTouched, setIsTouched] = useState(false)
   const [initialValue] = useState(value)
 
-  useEffect(()=>{
-
-    if(value !== initialValue){
+  useEffect(() => {
+    if (value !== initialValue) {
       setIsTouched(true)
     }
-  },[value])
+  }, [value])
 
   useEffect(() => {
     if (validations && isTouched) {
-    name in errors ? setError(errors[name]) : setError("");
+      name in errors ? setError(errors[name]) : setError('')
     }
-  }, [value,validations]);
+  }, [value, validations])
 
   return (
     <div>
-      <InputField name={name} value={value} onChange={onChange}/>
+      <InputField name={name} value={value} onChange={onChange} />
       <p>
-        <small style={{ color: "red" }}>{error}</small>
+        <small style={{ color: 'red' }}>{error}</small>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

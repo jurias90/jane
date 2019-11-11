@@ -26,6 +26,7 @@ const initialState = {
     firstName: "",
     lastName: "",
     route: "",
+    phone_number: '',
     locality: "",
     administrative_area_level_1: "",
     postal_code: "",

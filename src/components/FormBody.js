@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, connect } from 'react-redux'
 import { updateUser } from '../redux/ducks/user'
 import { withRouter } from 'react-router-dom'
@@ -28,24 +28,22 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
     dispatchUpdateUser({
       [name]: value,
     })
+    const isValid = 'isValid'
+    if (form.isValid) {
+      dispatchUpdateUser({
+        [isValid]: true,
+      })
+    } else {
+      dispatchUpdateUser({
+        [isValid]: false,
+      })
+    }
   }
 
   const handleOnClick = () => {
     console.log('Form', form.isValid)
     history.push('/search')
   }
-
-  useEffect(() => {
-    if (form.isValid) {
-      dispatchUpdateUser({
-        ['isValid']: true,
-      })
-    } else {
-      dispatchUpdateUser({
-        ['isValid']: false,
-      })
-    }
-  }, [form.isValid])
 
   return (
     <Form>
@@ -71,6 +69,15 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
       <Input
         name="email"
         value={user.email}
+        onChange={onChange}
+        form={user}
+        validations={form.validations}
+        errors={form.errors}
+      />
+      <p>Phone Number: </p>
+      <Input
+        name="phone_number"
+        value={user.phone_number}
         onChange={onChange}
         form={user}
         validations={form.validations}

@@ -1,20 +1,23 @@
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core";
-import { Link } from "react-router-dom";
+import React from 'react'
+import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
-const style = css`
-  background: #5755d9;
-  text-align: center;
-`;
+const Bar = styled.div({
+  background: '#5755d9',
+  textAlign: 'center',
+  height: '30px',
+})
 
 function NavBar() {
   return (
-    <div css={style}>
+    <Bar>
       <Link to="/">
-        <span>💛</span>
+        <span role="img" aria-label="heart">
+          💛
+        </span>
       </Link>
-    </div>
-  );
+    </Bar>
+  )
 }
 
-export default NavBar;
+export default NavBar
