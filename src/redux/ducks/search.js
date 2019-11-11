@@ -7,14 +7,14 @@ import update from "immutability-helper";
 |-------------------------------------------------------------------------------
 */
 
-export const UPDATE_USER = "user/UPDATE_USER";
+export const UPDATE_SEARCH = "search/UPDATE_SEARCH";
 
 /*
 |-------------------------------------------------------------------------------
 | Standard Actions
 |-------------------------------------------------------------------------------
 */
-export const updateUser = createAction(UPDATE_USER);
+export const updateSearch = createAction(UPDATE_SEARCH);
 
 /*
 |-------------------------------------------------------------------------------
@@ -22,22 +22,15 @@ export const updateUser = createAction(UPDATE_USER);
 |-------------------------------------------------------------------------------
 */
 const initialState = {
-  user: {
-    firstName: "",
-    lastName: "",
-    route: "",
-    locality: "",
-    administrative_area_level_1: "",
-    postal_code: "",
-    email: "",
-    isValid: false,
+  search: {
+    term: "",
   }
 };
 
-export const userReducer = (state = initialState, { type, payload }) => {
+export const searchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case UPDATE_USER:
-      return update(state, { user: { $merge: payload } });
+    case UPDATE_SEARCH:
+      return update(state, { search: { $merge: payload } });
 
     default:
       return state;

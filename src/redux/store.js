@@ -1,8 +1,9 @@
 import { createStore, combineReducers } from "redux";
 import { userReducer as user } from "./ducks/user";
-
+import { searchReducer as search } from './ducks/search'
 const reducers = combineReducers({
-  user
+  user,
+  search
 });
 
 const store = createStore(
