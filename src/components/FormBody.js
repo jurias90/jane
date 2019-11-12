@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, connect } from 'react-redux'
 import { updateUser } from '../redux/ducks/user'
 import { withRouter } from 'react-router-dom'
@@ -21,13 +21,7 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
 
   const form = useForm({ form: user })
 
-  const onChange = event => {
-    const {
-      target: { name, value },
-    } = event
-    dispatchUpdateUser({
-      [name]: value,
-    })
+  useEffect(() => {
     const isValid = 'isValid'
     if (form.isValid) {
       dispatchUpdateUser({
@@ -38,6 +32,15 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
         [isValid]: false,
       })
     }
+  }, [form, user])
+
+  const onChange = event => {
+    const {
+      target: { name, value },
+    } = event
+    dispatchUpdateUser({
+      [name]: value,
+    })
   }
 
   const handleOnClick = () => {
@@ -125,7 +128,4 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
     </Form>
   )
 }
-export default connect(
-  undefined,
-  mapDispatchToProps
-)(withRouter(FormBody))
+export default connect(undefined, mapDispatchToProps)(withRouter(FormBody))

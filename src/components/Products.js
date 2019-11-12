@@ -18,6 +18,7 @@ const Page = styled.div({
 
 const SearchBar = styled.input({
   width: '15em',
+  height: '3em',
   border: '1px solid grey',
   margin: '0px auto',
 })
@@ -27,8 +28,21 @@ const UserAddress = styled.div({
   margin: '0px auto',
 })
 
+const Submit = styled.button({
+  backgroundColor: '#66ff33',
+  textAlign: 'center',
+  borderRadius: '15px',
+  width: '5em',
+  height: '1em',
+  marginTop: '5%',
+  fontSize: '90%',
+  boxShadow: '1px 2px',
+})
+
 const Products = ({ dispatchUpdateSearch }) => {
+  const initialsProducts = useState(data['products'])
   const [products, setProducts] = useState(data['products'])
+
   const searchTopics = {
     name: '',
     brand: '',
@@ -37,9 +51,12 @@ const Products = ({ dispatchUpdateSearch }) => {
     kind_subtype: '',
     description: '',
   }
+
   const search = useSelector(state => state.search.search)
   const user = useSelector(state => state.user.user)
+
   const updateProducts = () => {
+    setProducts(initialsProducts)
     let searchTerm = search.term.toLowerCase()
     let tempTopic = ''
     let tempProducts = []
@@ -48,8 +65,7 @@ const Products = ({ dispatchUpdateSearch }) => {
         tempTopic = element[key]
         if (!tempTopic) {
           continue
-        }
-        if (tempTopic.toLowerCase().includes(searchTerm)) {
+        } else if (tempTopic.toLowerCase().includes(searchTerm)) {
           tempProducts.push(element)
           break
         }
@@ -58,16 +74,13 @@ const Products = ({ dispatchUpdateSearch }) => {
     setProducts(tempProducts)
   }
 
-  useEffect(updateProducts => {
+  useEffect(() => {
     updateProducts()
   }, [])
 
-  useEffect(
-    updateProducts => {
-      updateProducts()
-    },
-    [search]
-  )
+  useEffect(() => {
+    updateProducts()
+  }, [search])
 
   const onChange = e => {
     const {
@@ -76,11 +89,17 @@ const Products = ({ dispatchUpdateSearch }) => {
     dispatchUpdateSearch({
       [name]: value,
     })
+    updateProducts()
   }
+
+  const handleOnClick = () => {}
 
   return (
     <Page>
-      <SearchBar name={'term'} value={search.term} onChange={onChange} />
+      <div>
+        <SearchBar name={'term'} value={search.term} onChange={onChange} />
+        <Submit onClick={handleOnClick}>Submit</Submit>
+      </div>
       <UserAddress>
         <p>
           {user.route +
