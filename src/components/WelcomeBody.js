@@ -8,6 +8,7 @@ const Welcome = styled.div({
   display: 'inline-block',
   alignItems: 'center',
   margin: '25%',
+  width: '100%',
   textShadow: '1px 2px #c0c0c0',
 })
 const Continue = styled.button({
