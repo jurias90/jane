@@ -8,7 +8,7 @@ const Welcome = styled.div({
   display: 'inline-block',
   alignItems: 'center',
   margin: '5%',
-  padding:'auto'
+  padding: 'auto',
   width: '80%',
   textShadow: '1px 2px #c0c0c0',
 })
