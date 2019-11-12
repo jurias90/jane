@@ -64,7 +64,7 @@ const Products = ({ dispatchUpdateSearch }) => {
 
   useEffect(
     updateProducts => {
-      updateProducts
+      updateProducts()
     },
     [search]
   )
