@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import { updateUser } from '../redux/ducks/user'
