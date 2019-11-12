@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateUser } from '../redux/ducks/user'
 import styled from '@emotion/styled'
@@ -8,7 +7,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchUpdateUser: payload => dispatch(updateUser(payload)),
 })
 
-const SearchField = styled.input(({ errors, history }) => ({
+const SearchField = styled.input(({ errors }) => ({
   color: errors ? 'red' : 'black',
   width: '50%',
 }))
@@ -89,4 +88,4 @@ const Search = ({
   )
 }
 
-export default connect(undefined, mapDispatchToProps)(withRouter(Search))
+export default connect(undefined, mapDispatchToProps)(Search)
