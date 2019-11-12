@@ -7,7 +7,7 @@ const Welcome = styled.div({
   height: 'calc(100vh - 70px)',
   display: 'inline-block',
   alignItems: 'center',
-  margin: '25%',
+  margin: '5%',
   width: '100%',
   textShadow: '1px 2px #c0c0c0',
 })
