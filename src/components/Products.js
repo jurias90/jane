@@ -39,8 +39,7 @@ const Products = ({ dispatchUpdateSearch }) => {
   }
   const search = useSelector(state => state.search.search)
   const user = useSelector(state => state.user.user)
-
-  useEffect(() => {
+  const updateProducts = () => {
     let searchTerm = search.term.toLowerCase()
     let tempTopic = ''
     let tempProducts = []
@@ -56,9 +55,19 @@ const Products = ({ dispatchUpdateSearch }) => {
         }
       }
     })
-    console.log(tempProducts, searchTerm)
     setProducts(tempProducts)
+  }
+
+  useEffect(updateProducts => {
+    updateProducts()
   }, [])
+
+  useEffect(
+    updateProducts => {
+      updateProducts
+    },
+    [search]
+  )
 
   const onChange = e => {
     const {
@@ -97,7 +106,4 @@ const Products = ({ dispatchUpdateSearch }) => {
   )
 }
 
-export default connect(
-  undefined,
-  mapDispatchToProps
-)(Products)
+export default connect(undefined, mapDispatchToProps)(Products)
