@@ -7,7 +7,7 @@ const Welcome = styled.div({
   height: 'calc(100vh - 70px)',
   display: 'inline-block',
   alignItems: 'center',
-  padding: 'auto 20%',
+  margin: '25%',
   textShadow: '1px 2px #c0c0c0',
 })
 const Continue = styled.button({
