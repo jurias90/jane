@@ -9,7 +9,7 @@ function validator(form) {
       valid = value.includes('@') ? true : false
       errors[key] = !valid ? 'Please add the @ to your email.' : null
     }
-    if (key === 'phone_number') {
+    else if (key === 'phone_number') {
       valid = value.length > 9 ? true : false
       errors[key] = !valid
         ? 'Please add all 10 digits of your phone number, Including Area Code'
