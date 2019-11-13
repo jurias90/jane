@@ -41,18 +41,20 @@ const Search = ({
       administrative_area_level_1: 'short_name',
       postal_code: 'short_name',
     }
-    address['route'] = place[0]['short_name'] + ' ' + place[1]['long_name']
-    for (let i = 0; i < place.length; i++) {
-      const type = place[i].types[0]
-      if (mapping[type]) {
-        const value = place[i][mapping[type]]
-        address[type] = value
+    if (place) {
+      address['route'] = place[0]['short_name'] + ' ' + place[1]['long_name']
+      for (let i = 0; i < place.length; i++) {
+        const type = place[i].types[0]
+        if (mapping[type]) {
+          const value = place[i][mapping[type]]
+          address[type] = value
+        }
       }
-    }
-    for (const name in address) {
-      dispatchUpdateUser({
-        [name]: address[name],
-      })
+      for (const name in address) {
+        dispatchUpdateUser({
+          [name]: address[name],
+        })
+      }
     }
   }
 
