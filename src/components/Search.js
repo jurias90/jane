@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
-import { updateUser } from '../redux/ducks/user'
 import styled from '@emotion/styled'
+import { updateUser } from '../redux/ducks/user'
 
 const mapDispatchToProps = dispatch => ({
   dispatchUpdateUser: payload => dispatch(updateUser(payload)),
@@ -37,15 +37,12 @@ const Search = ({
     let place = ac.getPlace().address_components
     const address = {}
     const mapping = {
-      street_number: 'short_name',
-      route: 'long_name',
       locality: 'long_name',
       administrative_area_level_1: 'short_name',
       postal_code: 'short_name',
     }
     address['route'] = place[0]['short_name'] + ' ' + place[1]['long_name']
-    console.log(place)
-    for (let i = 2; i < place.length; i++) {
+    for (let i = 0; i < place.length; i++) {
       const type = place[i].types[0]
       if (mapping[type]) {
         const value = place[i][mapping[type]]

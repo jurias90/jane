@@ -8,14 +8,18 @@ const Bar = styled.div({
   height: '30px',
 })
 
+const Logo = styled.div({
+  '> a': { textDecoration: 'none' },
+  fontSize: '20px',
+  padding: '1px 0px',
+})
+
 function NavBar() {
   return (
     <Bar>
-      <Link to="/">
-        <span role="img" aria-label="heart">
-          💛
-        </span>
-      </Link>
+      <Logo>
+        <Link to="/">💛</Link>
+      </Logo>
     </Bar>
   )
 }

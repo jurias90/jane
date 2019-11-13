@@ -19,7 +19,7 @@ const Input = ({ name, value, onChange, form, validations, errors }) => {
 
   useEffect(() => {
     if (validations && isTouched) {
-      name in errors ? setError(errors[name]) : setError('')
+      setError(errors[name] ? errors[name] : '')
     }
   }, [value, validations])
 

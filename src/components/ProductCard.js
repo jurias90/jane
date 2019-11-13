@@ -16,33 +16,38 @@ const Card = styled.div({
 const AddToCart = styled.button({
   backgroundColor: '#66ff33',
   textAlign: 'center',
-  borderRadius: '15px',
+  borderRadius: '3px',
   width: '10em',
   height: '2em',
   marginTop: '5%',
   fontSize: '90%',
-  boxShadow: '1px 2px',
 })
 
 const stockImg =
   'https://s3-us-west-1.amazonaws.com/iheartjane/images/stock_photos/general/indica.png'
 
-const ProductCard = ({
-  name = '',
-  brand = '',
-  category = '',
-  kind = '',
-  img = stockImg,
-}) => {
+const ProductCard = p => {
   return (
     <Container>
       <Card>
-        <img alt={'Image of' + name} src={img} width="125px" />
-        <div position="right">
-          <h4>{category}</h4>
-          <h3>{name}</h3>
-          <h3>{kind}</h3>
-          <h3>{brand}</h3>
+        <img
+          alt={'Image of' + p.product.name}
+          src={
+            p.product.photos === ''
+              ? stockImg
+              : p.product.photos[0].urls.extraLarge
+          }
+          width="125px"
+        />
+        <div>
+          <h4>{p.product.category}</h4>
+          <h3>{p.productname}</h3>
+          <h3>
+            {p.product.kind_subtype.length > 0
+              ? p.product.kind_subtype
+              : p.product.kind}
+          </h3>
+          <h3>{p.product.brand}</h3>
           <p>#420</p>
           <AddToCart>AddToCart</AddToCart>
         </div>

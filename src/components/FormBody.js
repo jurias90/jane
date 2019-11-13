@@ -22,16 +22,9 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
   const form = useForm({ form: user })
 
   useEffect(() => {
-    const isValid = 'isValid'
-    if (form.isValid) {
-      dispatchUpdateUser({
-        [isValid]: true,
-      })
-    } else {
-      dispatchUpdateUser({
-        [isValid]: false,
-      })
-    }
+    dispatchUpdateUser({
+      ['isValid']: form.isValid,
+    })
   }, [form, user])
 
   const onChange = event => {
@@ -44,8 +37,7 @@ const FormBody = ({ dispatchUpdateUser, history }) => {
   }
 
   const handleOnClick = () => {
-    console.log('Form', form.isValid)
-    history.push('/search')
+    history.push('/products')
   }
 
   return (
